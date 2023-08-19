@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Product {
+export class Marca {
   @PrimaryGeneratedColumn({ type: 'int4' })
   id?: number;
 
@@ -11,9 +11,4 @@ export class Product {
   @Column({ type: 'varchar', length: 300, nullable: false })
   description: string;
 
-  @Column({ type: 'int4', nullable: false })
-  price: number;
-
-  @Column({ type: 'int8', nullable: false })
-  stock: number;
 }

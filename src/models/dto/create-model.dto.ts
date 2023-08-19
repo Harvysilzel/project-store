@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString, MaxLength } from "class-validator";
 
-export class CreateProductDto {
+export class CreateModelDto {
     @IsNotEmpty()
     @IsNumber()
     id?: number;
@@ -20,13 +20,6 @@ export class CreateProductDto {
 
     @IsNumber()
     @IsNotEmpty()
-    price: number;
-
-    
-    @IsNumber()
-    @IsNotEmpty()
-    stock: number;
-    
-
+    año: number;
 
 }
