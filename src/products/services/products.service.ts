@@ -18,7 +18,7 @@ export class ProductsService{
     }
 
     findOne(id: number) {
-        return this.productRepo.findOneBy({ id });
+        return this.productRepo.findOne({ where:{id}, relations:{autor: true,} });
     }
 
     findAll(){

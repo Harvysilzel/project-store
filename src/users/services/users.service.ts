@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Product } from "src/products/entities/product.entity";
 import { Repository } from "typeorm";
 import { CreateUserDto } from '../dto/user.dto';
 import { User } from "../entities/user.entity";
@@ -10,7 +9,7 @@ import { User } from "../entities/user.entity";
 export class UsersService{
     constructor(
         @InjectRepository(User)
-        private readonly userRepo: Repository<Product>
+        private readonly userRepo: Repository<User>
     ){}
 
     async create(CreateUserDto: CreateUserDto){

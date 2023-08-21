@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from 'src/users/entities/user.entity';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Product {
@@ -16,4 +17,14 @@ export class Product {
 
   @Column({ type: 'int8', nullable: false })
   stock: number;
+
+  @Column({type: 'int4', nullable: false})
+  user_id: number;
+
+  @ManyToOne( () =>User)
+  @JoinColumn({
+    name: 'user_id',
+    referencedColumnName: 'id',
+  })
+autor:User;
 }
