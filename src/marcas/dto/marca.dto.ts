@@ -1,18 +1,17 @@
-import { IsNotEmpty, IsNumber, IsString, MaxLength } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString, MaxLength} from 'class-validator';
 
 export class CreateMarcaDto {
-    @IsNotEmpty()
-    @IsNumber()
-    id?: number;
+  @IsNotEmpty()
+  @IsNumber()
+  id: number;
 
-    @IsString()
-    @IsNotEmpty()
-    @MaxLength(100)
-    name: string;
+  @IsString()
+  @IsNotEmpty()
+  @MaxLength(100)
+  marca: string;
 
-    @IsString()
-    @IsNotEmpty()
-    @MaxLength(300)
-    description:string ;
+  @IsNumber()
+  @IsNotEmpty()
+  user_id: number;
 
 }

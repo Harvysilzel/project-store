@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MarcasModule } from './marcas/marcas.module';
-import { ModelsModule } from './marcas/models.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductsModule } from './products/products.module';
 import { UsersModule } from './users/users.module';
+import { MarcasModule } from './marcas/marcas.module';
+import { FilesModule } from './files/files.module';
+import { FilesPdfModule } from './filesPDF/pdfFiles.module';
 
 @Module({
   imports: [
@@ -19,9 +20,12 @@ import { UsersModule } from './users/users.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    MarcasModule, ModelsModule, ProductsModule, UsersModule
+    ProductsModule,
+    UsersModule,
+    MarcasModule,
+    FilesModule,
+    FilesPdfModule
   ],
-  
   controllers: [AppController],
   providers: [AppService],
 })

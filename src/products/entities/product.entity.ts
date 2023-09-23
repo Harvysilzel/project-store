@@ -1,5 +1,8 @@
-import { User } from 'src/users/entities/user.entity';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from '../../users/entities/user.entity';
+import { Category } from './category.entity';
+import { Proveedor } from './proveedor.entity';
+import { ProductImage } from './product-image.entity';
 
 @Entity()
 export class Product {
@@ -21,10 +24,44 @@ export class Product {
   @Column({type: 'int4', nullable: false})
   user_id: number;
 
-  @ManyToOne( () =>User)
+  @Column({ type: 'varchar',  nullable: true })
+  filename: string;
+
+  @CreateDateColumn({ type: 'timestamp', default: ()=>'CURRENT_TIMESTAMP' })
+  created_at: Date;
+
+  @Column({ type: 'int4', nullable: false })
+  categoria_id: number;
+
+  @Column({ type: 'int4', nullable: true })
+  proveedor_id: number;
+
+  //relaciones
+  @ManyToOne(()=> User)
   @JoinColumn({
-    name: 'user_id',
-    referencedColumnName: 'id',
+    name: 'user_id', //el campo que relaciona la tabla
+    referencedColumnName: 'id' //este es el id del usuario
+
   })
-autor:User;
+  autor: User;
+
+  @ManyToOne(() => Category)
+  @JoinColumn({ 
+    name: 'categoria_id',
+    referencedColumnName: 'id'
+   })
+  categoria: Category;
+
+
+  @ManyToOne(() => Proveedor)
+  @JoinColumn({ 
+    name: 'proveedor_id',
+    referencedColumnName: 'id'
+   })
+  proveedor: Proveedor;
+
+  @OneToMany(() => ProductImage, (productImage) => productImage.product, {
+    cascade: true,
+  })
+  images?: ProductImage[];
 }
