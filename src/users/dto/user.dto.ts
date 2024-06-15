@@ -1,5 +1,7 @@
 import {
+  IsArray,
   IsBoolean,
+  IsEmpty,
   IsNotEmpty,
   IsNumber,
   IsOptional,
@@ -33,4 +35,18 @@ export class CreateUserDto {
   @IsBoolean()
   @IsOptional()
   active: boolean;
+
+  @IsArray({ each: true })
+  @IsString()
+  @IsOptional()
+  images?: string[];
+
+  @IsString()
+  @IsOptional()
+  direccionUser: string;
+
+  @IsNumber()
+  @IsOptional()
+  telefonoUser: number;
+
 }

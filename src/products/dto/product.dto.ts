@@ -1,4 +1,5 @@
-import { IsArray, IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsArray, IsBoolean, IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength } from 'class-validator';
+import { DeepPartial } from 'typeorm';
 
 export class CreateProductDto {
   @IsNotEmpty()
@@ -22,6 +23,14 @@ export class CreateProductDto {
   @IsNumber()
   @IsOptional()
   stock: number;
+
+  @IsBoolean()
+  @IsOptional()
+  descuento: DeepPartial<boolean>;
+
+  @IsNumber()
+  @IsOptional()
+  desc: number;
 
   @IsNumber()
   @IsNotEmpty()

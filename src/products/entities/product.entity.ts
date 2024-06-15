@@ -3,6 +3,7 @@ import { User } from '../../users/entities/user.entity';
 import { Category } from './category.entity';
 import { Proveedor } from './proveedor.entity';
 import { ProductImage } from './product-image.entity';
+import { type } from 'os';
 
 @Entity()
 export class Product {
@@ -20,6 +21,12 @@ export class Product {
 
   @Column({ type: 'int8', nullable: false })
   stock: number;
+
+  @Column({type: 'boolean', default: false, nullable: true})
+  descuento: boolean;
+
+  @Column({type: 'int4', nullable: true})
+  desc: number;
 
   @Column({type: 'int4', nullable: false})
   user_id: number;

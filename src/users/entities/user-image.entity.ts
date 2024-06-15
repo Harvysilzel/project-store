@@ -1,10 +1,10 @@
 import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Product } from './product.entity';
+import { User } from "./user.entity";
 
 
 
 @Entity()
-export class ProductImage{
+export class UserImage{
     @PrimaryGeneratedColumn({type: 'int4'})
     id: number;
 
@@ -12,10 +12,10 @@ export class ProductImage{
     url: string;
 
     //Muchas imagenes seran de un producto
-    @ManyToOne(() => Product, (product) => product.images, {
+    @ManyToOne(() => User, (user) => user.images, {
         onDelete: 'CASCADE',
     })
 
-    product: Product;
+    user: User;
     
 }

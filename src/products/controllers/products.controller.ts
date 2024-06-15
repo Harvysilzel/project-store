@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from "@nestjs/common";
 import { ProductsService } from '../services/products.service';
 import { CreateProductDto } from "../dto/product.dto";
+import { Request, Response } from "express";
 
 @Controller('products')
 export class ProductController
@@ -33,5 +34,39 @@ export class ProductController
     )
     {
         return this.productsService.update(id, createProductDto)
+        
     }
+
+
+
+
+    @Get('VirtualStore/:proveedor_id')
+    findProveedor(@Param('proveedor_id', ParseIntPipe) proveedor_id: number){
+        return this.productsService.findProveedor(proveedor_id); //aqui estoy llamando a todos los productos de el id proveedor
+    }
+
+
+    @Get('categories/:categoria_id')
+    findCategories(@Param('categoria_id', ParseIntPipe) categoria_id: number) {
+      return this.productsService.findCategorie(categoria_id); // Llama a la función corregida en el servicio
+    
+        
+    }
+
+    @Get('descuentos/:descuento')
+    findDescuentos(@Param('descuento') descuento: boolean){
+        return this.productsService.findDescuento(descuento);
+    }
+
+
+
+    @Get('random/:count')
+  getRandomProducts(@Param('count') count: number) {
+    return this.productsService.getRandomProducts(count);
+  }
+      
+    
+
+   
+
 }
