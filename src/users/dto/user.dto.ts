@@ -48,5 +48,6 @@ export class CreateUserDto {
   @IsNumber()
   @IsOptional()
   telefonoUser: number;
+  
 
 }
