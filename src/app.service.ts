@@ -3,6 +3,6 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'hola mundo aqui no hay nada que ver valla a la pagina principal!';
+    return 'hola mundo aqui no hay nada que ver valla a la pagina principal! no tiene nada que hacer aqui';
   }
 }
