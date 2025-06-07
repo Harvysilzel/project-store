@@ -12,22 +12,27 @@ import { FilesPdfModule } from './filesPDF/pdfFiles.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: 'dpg-d12bllmmcj7s73f759dg-a.oregon-postgres.render.com',
       port: 5432,
-      username: 'postgres',
-      password: '12345678',
-      database: 'shop',
+      username: 'db_plaza_emprende_user',
+      password: 'DMEFS7fDRgZoNNsr6YjeICXtD0pMGtEI',
+      database: 'db_plaza_emprende',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
+      ssl: true,
+      extra: {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      },
     }),
     ProductsModule,
     UsersModule,
     MarcasModule,
     FilesModule,
-    FilesPdfModule
+    FilesPdfModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-
 export class AppModule {}
