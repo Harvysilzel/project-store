@@ -8,7 +8,7 @@ export class AppController {
   @Get()
   getHello() {
     return {
-      message: 'hola mundo lo estoy haciendo bien',
+      message: 'hola mundo lo estoy haciendo bien y estas aqui por un error ',
     };
   }
 
