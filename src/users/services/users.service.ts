@@ -7,6 +7,7 @@ import { UserImage } from '../entities/user-image.entity';
 
 @Injectable()
 export class UsersService{
+  
     constructor(
         @InjectRepository(User)
         private userRepo: Repository<User>,
@@ -53,6 +54,10 @@ export class UsersService{
         return 'Usuario eliminado';
     }
 
+    async findByEmail(email: string): Promise<User | null> {
+  return await this.userRepo.findOne({ where: { email } });
+}
+
     //actualizar un usuario con imagenes
     async update(id: number, cambios: CreateUserDto){
         const {images, ...updateAll } = cambios;
@@ -89,4 +94,9 @@ export class UsersService{
         await queryRunner.release();
         return user;
     }
+
+    
+
+  
+
 }

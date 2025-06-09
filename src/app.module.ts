@@ -1,4 +1,6 @@
+// app.module.ts
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -10,21 +12,26 @@ import { FilesPdfModule } from './filesPDF/pdfFiles.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'dpg-d12bllmmcj7s73f759dg-a.oregon-postgres.render.com',
-      port: 5432,
-      username: 'db_plaza_emprende_user',
-      password: 'DMEFS7fDRgZoNNsr6YjeICXtD0pMGtEI',
-      database: 'db_plaza_emprende',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
-      ssl: true,
-      extra: {
-        ssl: {
-          rejectUnauthorized: false,
-        },
-      },
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development',
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        type: 'postgres',
+        host: config.get('DB_HOST'),
+        port: +config.get<number>('DB_PORT'),
+        username: config.get('DB_USERNAME'),
+        password: config.get('DB_PASSWORD'),
+        database: config.get('DB_NAME'),
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        synchronize: true,
+        ssl: config.get('NODE_ENV') === 'production' ? {
+          rejectUnauthorized: false
+        } : false,
+      }),
     }),
     ProductsModule,
     UsersModule,

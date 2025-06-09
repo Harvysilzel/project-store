@@ -1,16 +1,20 @@
+// main.ts
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // ✅ Habilitar CORS solo para tu frontend en Vercel
+  const configService = app.get(ConfigService);
+  const frontendUrl = configService.get('FRONTEND_URL');
+
   app.enableCors({
-    origin: 'https://front-store-alpha.vercel.app',
+    origin: frontendUrl,
     credentials: true,
   });
 
-  const port = process.env.PORT || 3000;
+  const port = configService.get('PORT') || 3000;
   await app.listen(port);
 }
 bootstrap();
